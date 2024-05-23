@@ -1,0 +1,6 @@
+@Abigeapp.Web.Server_HostAddress = http://localhost:5171
+
+GET {{Abigeapp.Web.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
