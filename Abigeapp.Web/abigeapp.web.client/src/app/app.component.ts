@@ -23,14 +23,15 @@ export class AppComponent implements OnInit {
   }
 
   getForecasts() {
-    this.http.get<WeatherForecast[]>('/weatherforecast').subscribe(
-      (result) => {
-        this.forecasts = result;
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
+    this.http.get<any>('/api/fincas/bd62482d-e78c-4605-9f9d-70811d856096')
+      .subscribe({
+        next: (result) => {
+          console.log(result);
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      });
   }
 
   title = 'abigeapp.web.client';

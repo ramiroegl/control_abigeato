@@ -2,9 +2,10 @@
 
 public class Coordenada
 {
-    public Coordenada(Guid perimetroId, decimal latitud, decimal longitud)
+    public Coordenada(Guid perimetroId, int orden, decimal latitud, decimal longitud)
     {
         Id = Guid.NewGuid();
+        Orden = orden;
         PerimetroId = perimetroId;
         Latitud = latitud;
         Longitud = longitud;
@@ -15,4 +16,5 @@ public class Coordenada
     public Perimetro? Perimetro { get; set; }
     public decimal Latitud { get; set; }
     public decimal Longitud { get; set; }
+    public int Orden { get; set; }
 }

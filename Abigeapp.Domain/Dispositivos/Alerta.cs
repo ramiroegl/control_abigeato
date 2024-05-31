@@ -4,6 +4,7 @@ public class Alerta
 {
     public Alerta(Guid dispositivoId, string descripcion, decimal latitud, decimal longitud)
     {
+        Id = Guid.NewGuid();
         DispositivoId = dispositivoId;
         Descripcion = descripcion;
         FechaCreacion = DateTimeOffset.UtcNow;

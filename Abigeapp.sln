@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abigeapp.Domain", "Abigeapp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abigeapp.Infrastructure", "Abigeapp.Infrastructure\Abigeapp.Infrastructure.csproj", "{2E638B2A-F335-4C4A-8C58-CA993BAD73EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abigeapp.Web.Server", "Abigeapp.Web\Abigeapp.Web.Server\Abigeapp.Web.Server.csproj", "{037B4648-324C-48CF-AC04-C31570887473}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Abigeapp.Web.Server", "Abigeapp.Web\Abigeapp.Web.Server\Abigeapp.Web.Server.csproj", "{037B4648-324C-48CF-AC04-C31570887473}"
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "abigeapp.web.client", "Abigeapp.Web\abigeapp.web.client\abigeapp.web.client.esproj", "{0E3FE124-6420-4BB7-9AFB-3A6B7334F021}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Abigeapp.Domain.Tests", "Abigeapp.Domain.Tests\Abigeapp.Domain.Tests.csproj", "{914C6A6E-2D12-45E1-9941-1AC8E834C2AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,8 +43,15 @@ Global
 		{0E3FE124-6420-4BB7-9AFB-3A6B7334F021}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0E3FE124-6420-4BB7-9AFB-3A6B7334F021}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0E3FE124-6420-4BB7-9AFB-3A6B7334F021}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{914C6A6E-2D12-45E1-9941-1AC8E834C2AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{914C6A6E-2D12-45E1-9941-1AC8E834C2AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{914C6A6E-2D12-45E1-9941-1AC8E834C2AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{914C6A6E-2D12-45E1-9941-1AC8E834C2AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {98E077BA-B117-43DD-85A7-650EDF73E68E}
 	EndGlobalSection
 EndGlobal
