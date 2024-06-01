@@ -1,0 +1,21 @@
+<div class="navbar bg-base-100">
+    <div class="flex-1">
+        <a class="btn btn-ghost text-xl" routerLink="/">Inicio</a>
+    </div>
+    <div class="flex-none">
+        <ul class="menu menu-horizontal px-1">
+            <li><a routerLink="/login" routerLinkActive="active">Iniciar Sesión</a></li>
+            <li><a routerLink="/devices" routerLinkActive="active">Dispositivos</a></li>
+            <li><a routerLink="/alerts" routerLinkActive="active">Alertas</a></li>
+            <li>
+                <details>
+                    <summary>[⚙️] Opciones</summary>
+                    <ul class="menu bg-base-200 rounded-box">
+                        <li><a routerLink="/logout">[❌] Cerrar Sesión</a></li>
+                    </ul>
+                </details>
+            </li>
+        </ul>
+
+    </div>
+</div>

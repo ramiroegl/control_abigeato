@@ -6,28 +6,33 @@ import { Observable } from "rxjs";
   providedIn: 'root'
 })
 export class LoginService {
-  private tokenKey = 'auth_token';
+  private tokenKey = 'session_data';
   constructor(private http: HttpClient) {
   }
 
   login(login: Login): Observable<LoginResult> {
-    return this.http.post<LoginResult>(`/api/users/login`, login);
+    return this.http.post<LoginResult>(`/api/usuarios/login`, login);
   }
 
-  saveToken(token: string): void {
-    localStorage.setItem(this.tokenKey, token);
+  saveSession(sessionData: LoginResult): void {
+    localStorage.setItem(this.tokenKey, JSON.stringify(sessionData));
   }
 
   logout(): void {
     localStorage.removeItem(this.tokenKey);
   }
 
-  getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
+  getSession(): LoginResult | null {
+    var sessionDataString = localStorage.getItem(this.tokenKey);
+    if (sessionDataString == null) {
+      return null;
+    }
+
+    return JSON.parse(sessionDataString);
   }
 
   isLoggedIn(): boolean {
-    return this.getToken() !== null;
+    return this.getSession() !== null;
   }
 }
 
@@ -37,13 +42,7 @@ export interface Login {
 }
 
 export interface LoginResult {
-  user: AuthedUser;
-  token: string;
-}
-
-export interface AuthedUser {
   id: string;
-  name: string;
-  lastName: string;
+  fincaId: string;
   email: string;
 }
