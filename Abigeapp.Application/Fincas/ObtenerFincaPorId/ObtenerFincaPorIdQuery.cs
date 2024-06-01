@@ -27,7 +27,7 @@ public class ObtenerFincaPorIdHandler(IFincaTabla fincaTabla) : IRequestHandler<
                 Id = perimetro.Id,
                 Nombre = perimetro.Descripcion,
                 Tipo = perimetro.Tipo,
-                Coordenadas = perimetro.Coordenadas!.Select(coordenada => new CoordenadaDto
+                Coordenadas = perimetro.Coordenadas!.OrderBy(coordenada => coordenada.Orden).Select(coordenada => new CoordenadaDto
                 {
                     Orden = coordenada.Orden,
                     Latitud = coordenada.Latitud,

@@ -7,27 +7,25 @@ namespace Abigeapp.Application.Dispositivos.CrearDispositivo;
 
 public record CrearDispositivoCommand(Guid PerimetroId, string Codigo, decimal Latitud, decimal Longitud) : IRequest<CrearDispositivoResponse>;
 
-public class CrearDispositivoHandler : IRequestHandler<CrearDispositivoCommand, CrearDispositivoResponse>
+public class CrearDispositivoHandler(IPerimetroTabla perimetroRepository, IDispositivoTabla dispositivoRepository, IAlertaTabla alertaTabla) : IRequestHandler<CrearDispositivoCommand, CrearDispositivoResponse>
 {
-    private readonly IPerimetroTabla _perimetroRepository;
-    private readonly IDispositivoTabla _dispositivoRepository;
-
-    public CrearDispositivoHandler(IPerimetroTabla perimetroRepository, IDispositivoTabla dispositivoRepository)
-    {
-        _perimetroRepository = perimetroRepository;
-        _dispositivoRepository = dispositivoRepository;
-    }
-
     public async Task<CrearDispositivoResponse> Handle(CrearDispositivoCommand request, CancellationToken cancellationToken)
     {
-        var perimetro = await _perimetroRepository.GetByIdAsync(request.PerimetroId, cancellationToken);
+        var perimetro = await perimetroRepository.GetByIdAsync(request.PerimetroId, cancellationToken);
         if (perimetro is null)
         {
             throw new AbigeappException("El perimetro no existe");
         }
 
         var dispositivo = new Dispositivo(request.PerimetroId, request.Codigo, request.Latitud, request.Longitud);
-        await _dispositivoRepository.AddAsync(dispositivo, cancellationToken);
+        await dispositivoRepository.AddAsync(dispositivo, cancellationToken);
+
+        dispositivo.ActualizarPosicion(request.Latitud, request.Longitud);
+
+        if (dispositivo.Alertas is not null)
+        {
+            await alertaTabla.AddRangeAsync(dispositivo.Alertas, cancellationToken);
+        }
 
         return new CrearDispositivoResponse(dispositivo.Id);
     }

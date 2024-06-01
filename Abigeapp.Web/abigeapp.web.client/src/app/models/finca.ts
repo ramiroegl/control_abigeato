@@ -1,5 +1,6 @@
 export interface Finca {
     id: string;
+    nombre: string;
     latitud: number;
     longitud: number;
     perimetros: Perimetro[];
@@ -8,7 +9,7 @@ export interface Finca {
 export interface Perimetro {
     id: string;
     nommbre: string;
-    tipo: number;
+    tipo: string;
     coordenadas: Coordenada[];
 }
 
@@ -17,3 +18,4 @@ export interface Coordenada {
     latitud: number;
     longitud: number;
 }
+

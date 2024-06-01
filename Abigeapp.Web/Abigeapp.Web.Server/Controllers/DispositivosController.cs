@@ -1,3 +1,5 @@
+using Abigeapp.Application.Dispositivos;
+using Abigeapp.Application.Dispositivos.ActualizarPosicion;
 using Abigeapp.Application.Dispositivos.CrearDispositivo;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -12,5 +14,17 @@ public class DispositivosController(ISender sender) : ControllerBase
     public Task<CrearDispositivoResponse> CrearDispositivo(CrearDispositivoCommand command)
     {
         return sender.Send(command);
+    }
+
+    [HttpGet]
+    public Task<DispositivosPorFincaResponse> ObtenerDispositivoPorFinca([FromQuery] DispositivosPorFincaQuery query)
+    {
+        return sender.Send(query);
+    }
+
+    [HttpPut("{id:guid}/posicion")]
+    public Task<ActualizarPosicionResponse> ActualizarPosicion(Guid id, ActualizarPosicionCommand command)
+    {
+        return sender.Send(command with { Id = id });
     }
 }

@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
+import { Login } from '../models/login';
+import { LoginResult } from '../models/loginResult';
 
 @Injectable({
   providedIn: 'root'
@@ -36,13 +38,3 @@ export class LoginService {
   }
 }
 
-export interface Login {
-  email: string;
-  password: string;
-}
-
-export interface LoginResult {
-  id: string;
-  fincaId: string;
-  email: string;
-}

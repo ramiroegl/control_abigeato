@@ -27,7 +27,7 @@ public class Perimetro
 
     public bool EstaDentro(decimal latitud, decimal longitud)
     {
-        if (Coordenadas is null)
+        if (Coordenadas == null || Coordenadas.Count == 0)
         {
             throw new InvalidOperationException("El perimetro no tiene coordenadas asignadas");
         }
@@ -39,8 +39,12 @@ public class Perimetro
 
         for (var i = 0; i < n; i++)
         {
-            if (coordenadas[i].Latitud < latitud && coordenadas[j].Latitud >= latitud || coordenadas[j].Latitud < latitud && coordenadas[i].Latitud >= latitud)
+            bool condicion1 = (coordenadas[i].Latitud < latitud && coordenadas[j].Latitud >= latitud);
+            bool condicion2 = (coordenadas[j].Latitud < latitud && coordenadas[i].Latitud >= latitud);
+
+            if (condicion1 || condicion2)
             {
+                // Calculamos la intersección y verificamos la condición
                 if (coordenadas[i].Longitud + (latitud - coordenadas[i].Latitud) / (coordenadas[j].Latitud - coordenadas[i].Latitud) * (coordenadas[j].Longitud - coordenadas[i].Longitud) < longitud)
                 {
                     estaDentro = !estaDentro;

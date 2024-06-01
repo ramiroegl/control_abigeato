@@ -11,7 +11,7 @@ public class Dispositivo
         Codigo = codigo;
         Latitud = latitud;
         Longitud = longitud;
-        Estado = EstadoDispositivo.Dentro;
+        Estado = EstadoDispositivo.Inactivo;
         FechaCreacion = DateTimeOffset.UtcNow;
     }
 
@@ -35,6 +35,10 @@ public class Dispositivo
         if (!EstaDentroDelPerimetro)
         {
             Alertar(EstadoDispositivo.Fuera, "El dispositivo se encuentra fuera del perimetro");
+        }
+        else
+        {
+            Estado = EstadoDispositivo.Dentro;
         }
     }
 

@@ -1,8 +1,13 @@
+<span>Finca: {{finca?.nombre ?? 'NA'}}</span>
 <div class="hero min-h-screen bg-base-200">
   <google-map height="600" width="1200" [center]="center" [zoom]="zoom" mapId="4e9837ce2994a1b4">
-    <map-advanced-marker [position]="center" title="Hola"></map-advanced-marker>
-    @for (perimetro of perimetros; track $index) {
-    <map-polygon [paths]="convertirCoordenadas(perimetro.coordenadas)"></map-polygon>
+    <map-advanced-marker [position]="center" title="{{finca?.nombre ?? 'Finca'}}"></map-advanced-marker>
+    @for (perimetro of finca?.perimetros ?? []; track $index) {
+    <map-polygon [paths]="convertirCoordenadas(perimetro.coordenadas)"
+      [options]="obtenerOpcionesDelPerimetro(perimetro)"></map-polygon>
+    }
+    @for (dispositivo of fincaConDispositivos?.dispositivos ?? []; track $index) {
+    <map-circle [title]="dispositivo.codigo" [options]="obtenerOpcionesDelDispositivo(dispositivo)"></map-circle>
     }
   </google-map>
 </div>

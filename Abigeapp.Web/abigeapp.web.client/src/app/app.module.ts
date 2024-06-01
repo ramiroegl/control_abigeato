@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { LogoutComponent } from './logout/logout.component';
+import { PerimetrosComponent } from './perimetros/perimetros.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { LogoutComponent } from './logout/logout.component';
     HomeComponent,
     LoginComponent,
     HeaderComponent,
-    LogoutComponent
+    LogoutComponent,
+    PerimetrosComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,

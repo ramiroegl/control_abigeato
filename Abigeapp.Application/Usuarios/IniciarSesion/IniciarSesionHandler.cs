@@ -21,6 +21,7 @@ public class IniciarSesionHandler(IUsuarioTabla usuarioTabla) : IRequestHandler<
             Id = usuario.Id,
             FincaId = usuario.FincaId,
             Email = usuario.Email,
+            NombreFinca = usuario.Finca!.Nombre
         };
     }
 }
