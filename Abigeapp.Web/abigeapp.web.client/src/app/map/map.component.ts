@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { GoogleMap, MapAdvancedMarker, MapCircle, MapPolygon } from '@angular/google-maps';
 import { Coordenada, Finca, Perimetro } from '../models/finca';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { LoginService } from '../services/login.service';
 import { Dispositivo, FincaConDispositivos } from '../models/dispositivo';
+import { Subscription, interval, switchMap } from 'rxjs';
+import { LoginResult } from '../models/loginResult';
 
 @Component({
   selector: 'app-map',
@@ -12,25 +14,28 @@ import { Dispositivo, FincaConDispositivos } from '../models/dispositivo';
   standalone: true,
   imports: [GoogleMap, MapAdvancedMarker, MapPolygon, MapCircle],
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnDestroy {
   zoom: number = 20;
+  center: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
+  private subscription: Subscription | null = null;
+  session: LoginResult | null = null;
   finca: Finca | null = null;
   fincaConDispositivos: FincaConDispositivos | null = null;
-  center: google.maps.LatLngLiteral = { lat: 0, lng: 0 };
   display?: google.maps.LatLngLiteral;
 
   constructor(private http: HttpClient, private loginService: LoginService) {
   }
 
   ngOnInit(): void {
-    this.http.get<Finca>(`/api/fincas/${this.loginService.getSession()?.fincaId}`)
+    this.session = this.loginService.getSession();
+    this.http.get<Finca>(`/api/fincas/${this.session?.fincaId}`)
       .subscribe({
         next: (result) => {
-          console.log('Obteniendo finca en mapa', result);
           this.finca = result;
           this.center = { lat: this.finca.latitud, lng: this.finca.longitud };
         },
         error: (error) => {
+          alert("Error al obtener datos de la finca");
           console.error(error);
         }
       });
@@ -40,16 +45,23 @@ export class MapComponent implements OnInit {
     params = params.append('pagina', 1);
     params = params.append('cantidad', 50);
 
-    this.http.get<FincaConDispositivos>(`/api/dispositivos`, { params: params })
-      .subscribe({
-        next: (result) => {
-          console.log('Obteniendo dispositivos en mapa', result);
-          this.fincaConDispositivos = result;
-        },
-        error: (error) => {
-          console.error(error);
-        }
-      });
+    this.subscription = interval(5000).pipe(
+      switchMap(() => this.http.get<FincaConDispositivos>(`/api/dispositivos`, { params: params }))
+    ).subscribe({
+      next: (result) => {
+        this.fincaConDispositivos = result;
+      },
+      error: (error) => {
+        console.error(error);
+        alert("Error al obtener dispositivos");
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    if (this.subscription != null) {
+      this.subscription.unsubscribe();
+    }
   }
 
   move(event: any) {
@@ -71,9 +83,10 @@ export class MapComponent implements OnInit {
     return {
       center: { lat: dispositivo.latitud, lng: dispositivo.longitud },
       fillColor: this.getCircleColor(dispositivo.estado),
-      radius: this.zoom * 0.1,
-      fillOpacity: 0.8,
-      strokeOpacity: 0
+      strokeColor: this.getCircleColor(dispositivo.estado),
+      radius: this.zoom * 0.3,
+      fillOpacity: 0.2,
+      strokeOpacity: 0.7
     };
   }
 

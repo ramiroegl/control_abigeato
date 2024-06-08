@@ -1,9 +1,7 @@
 ﻿using Abigeapp.Domain.Fincas;
 using MediatR;
 
-namespace Abigeapp.Application.Fincas.ObtenerFincaPorId;
-
-public record ObtenerFincaPorIdQuery(Guid Id) : IRequest<ObtenerFincaPorIdResponse>;
+namespace Abigeapp.Application.Fincas.ObtenerPorId;
 
 public class ObtenerFincaPorIdHandler(IFincaTabla fincaTabla) : IRequestHandler<ObtenerFincaPorIdQuery, ObtenerFincaPorIdResponse>
 {

@@ -1,15 +1,7 @@
-﻿using Abigeapp.Application.Dispositivos.PorFinca;
-using Abigeapp.Domain.Dispositivos;
+﻿using Abigeapp.Domain.Dispositivos;
 using MediatR;
 
-namespace Abigeapp.Application.Dispositivos;
-
-public record DispositivosPorFincaQuery : IRequest<DispositivosPorFincaResponse>
-{
-    public required Guid FincaId { get; init; }
-    public required int Pagina { get; init; }
-    public required int Cantidad { get; init; }
-}
+namespace Abigeapp.Application.Dispositivos.ObtenerPorFinca;
 
 public class DispositivosPorFincaHandler(IDispositivoTabla dispositivoTabla) : IRequestHandler<DispositivosPorFincaQuery, DispositivosPorFincaResponse>
 {
@@ -19,13 +11,18 @@ public class DispositivosPorFincaHandler(IDispositivoTabla dispositivoTabla) : I
         var dispositivos = await dispositivoTabla.ListAsync(obtenerDispositivosSpec, cancellationToken);
         var total = await dispositivoTabla.CountAsync(obtenerDispositivosSpec, cancellationToken);
 
-        return new DispositivosPorFincaResponse(dispositivos.Select(dispositivo => new DispositivoDto
+        return new DispositivosPorFincaResponse(dispositivos.Select(MapDispositivo), total);
+    }
+
+    private static DispositivoDto MapDispositivo(Dispositivo dispositivo)
+    {
+        return new DispositivoDto
         {
             Id = dispositivo.Id,
             Codigo = dispositivo.Codigo,
             Estado = dispositivo.Estado,
             Latitud = dispositivo.Latitud,
             Longitud = dispositivo.Longitud
-        }), total);
+        };
     }
 }

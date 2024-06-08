@@ -1,7 +1,7 @@
 ﻿using Abigeapp.Domain.Dispositivos;
 using System.Text.Json.Serialization;
 
-namespace Abigeapp.Application.Dispositivos.PorFinca;
+namespace Abigeapp.Application.Dispositivos;
 
 public record DispositivoDto
 {

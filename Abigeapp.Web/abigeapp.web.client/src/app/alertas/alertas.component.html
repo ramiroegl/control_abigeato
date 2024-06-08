@@ -1,0 +1,39 @@
+<div class="overflow-x-auto">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Estado</th>
+                <th>Dispositivo</th>
+                <th>Descripcion</th>
+                <th>Fecha</th>
+                <th>Latitud</th>
+                <th>Longitud</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (alerta of alertas; track $index) {
+            <tr class="hover">
+                <td>
+                    <span
+                        [className]="alerta.estado == 'Pendiente' ? 'badge badge-error gap-2' : 'badge badge-info gap-2'">{{alerta.estado}}
+                    </span>
+                </td>
+                <td>
+                    <a routerLink='/dispositivos/{{alerta.dispositivo.id}}/simular'
+                        class="btn btn-sm btn-outline btn-primary">{{alerta.dispositivo.codigo}}</a>
+                </td>
+                <td>{{alerta.descripcion}}</td>
+                <td>{{alerta.fechaCreacion | date:'long'}}</td>
+                <td>{{alerta.latitud}}</td>
+                <td>{{alerta.longitud}}</td>
+                <td>
+                    <div class="tooltip" data-tip="Marcar como leída">
+                        <input type="button" title="leer" class="btn btn-sm btn-outline btn-primary" value="✅" (click)="leer(alerta.id)" />
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,10 @@
+<span>Dispositivo: {{ dispositivo?.codigo ?? 'NA' }}</span>
+<div class="hero min-h-screen bg-base-200">
+    <google-map height="600" width="1200" [center]="posicion" [zoom]="zoom" mapId="4e9837ce2994a1b4"
+        (mapClick)="actualizarPosicion($event)" #mapInstance="googleMap">
+        <map-polygon [paths]="convertirCoordenadas(dispositivo?.perimetro?.coordenadas ?? [])"
+            [options]="obtenerOpcionesDelPerimetro(dispositivo?.perimetro)"
+            (polygonClick)="actualizarPosicion($event)"></map-polygon>
+        <map-advanced-marker [position]="posicion" [title]="dispositivo?.codigo ?? 'NA'"></map-advanced-marker>
+    </google-map>
+</div>

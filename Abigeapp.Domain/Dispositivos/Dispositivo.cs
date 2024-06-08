@@ -44,8 +44,11 @@ public class Dispositivo
 
     public void Alertar(EstadoDispositivo estado, string descripcion)
     {
+        if (Estado != estado)
+        {
+            Alertas ??= [];
+            Alertas.Add(new Alerta(Id, descripcion, Latitud, Longitud));
+        }
         Estado = estado;
-        Alertas ??= [];
-        Alertas.Add(new Alerta(Id, descripcion, Latitud, Longitud));
     }
 }

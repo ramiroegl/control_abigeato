@@ -16,6 +16,7 @@ public class ObtenerDispositivoSpec : Specification<Dispositivo>
     {
         Query
             .Where(dispositivo => dispositivo.Perimetro!.FincaId == fincaId)
+            .OrderByDescending(dispositivo => dispositivo.FechaModificacion)
             .Skip((pagina - 1) * cantidad)
             .Take(cantidad);
     }

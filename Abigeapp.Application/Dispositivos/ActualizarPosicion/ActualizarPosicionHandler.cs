@@ -24,6 +24,12 @@ public class ActualizarPosicionHandler(IDispositivoTabla dispositivoTabla, IAler
 
         await dispositivoTabla.UpdateAsync(dispositivo, cancellationToken);
 
-        return new ActualizarPosicionResponse(dispositivo.Id, dispositivo.Latitud, dispositivo.Longitud, dispositivo.Estado);
+        return new ActualizarPosicionResponse
+        {
+            Id = dispositivo.Id,
+            Estado = dispositivo.Estado,
+            Latitud = dispositivo.Latitud,
+            Longitud = dispositivo.Longitud
+        };
     }
 }

@@ -11,6 +11,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { LogoutComponent } from './logout/logout.component';
 import { PerimetrosComponent } from './perimetros/perimetros.component';
+import { DispositivosComponent } from './dispositivos/dispositivos.component';
+import { RouterModule, withComponentInputBinding } from '@angular/router';
+import { AlertasComponent } from './alertas/alertas.component';
 
 @NgModule({
   declarations: [
@@ -19,12 +22,15 @@ import { PerimetrosComponent } from './perimetros/perimetros.component';
     LoginComponent,
     HeaderComponent,
     LogoutComponent,
-    PerimetrosComponent
+    PerimetrosComponent,
+    DispositivosComponent,
+    AlertasComponent
   ],
   imports: [
     BrowserModule, HttpClientModule,
-    AppRoutingModule, 
-    MapComponent, ReactiveFormsModule
+    AppRoutingModule,
+    MapComponent, ReactiveFormsModule,
+    RouterModule.forRoot([], { bindToComponentInputs: true })
   ],
   providers: [],
   bootstrap: [AppComponent]

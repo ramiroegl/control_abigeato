@@ -1,0 +1,32 @@
+<div class="overflow-x-auto">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Codigo</th>
+                <th>Latitud</th>
+                <th>Longitud</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (dispositivo of dispositivos; track $index) {
+            <tr class="hover">
+                <td>{{dispositivo.codigo}}</td>
+                <td>{{dispositivo.latitud}}</td>
+                <td>{{dispositivo.longitud}}</td>
+                <td>
+                    <span
+                        [className]="dispositivo.estado == 'Fuera' ? 'badge badge-error gap-2' : 'badge badge-info gap-2'">{{dispositivo.estado}}
+                    </span>
+                </td>
+                <td>
+                    <div class="tooltip" data-tip="Simular coordenadas">
+                        <a routerLink='/dispositivos/{{dispositivo.id}}/simular' class="btn btn-sm btn-outline btn-primary">▶️</a>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+</div>

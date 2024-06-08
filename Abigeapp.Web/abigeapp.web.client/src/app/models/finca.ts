@@ -1,3 +1,5 @@
+import { Alerta } from "./dispositivo";
+
 export interface Finca {
     id: string;
     nombre: string;
@@ -13,9 +15,13 @@ export interface Perimetro {
     coordenadas: Coordenada[];
 }
 
+export interface FincaConAlertas {
+    alertas: Alerta[]
+    total: number;
+}
+
 export interface Coordenada {
     orden: number;
     latitud: number;
     longitud: number;
 }
-

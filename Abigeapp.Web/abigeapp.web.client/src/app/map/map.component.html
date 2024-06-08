@@ -1,4 +1,4 @@
-<span>Finca: {{finca?.nombre ?? 'NA'}}</span>
+<span>Finca: {{ finca?.nombre ?? session?.nombreFinca }}</span>
 <div class="hero min-h-screen bg-base-200">
   <google-map height="600" width="1200" [center]="center" [zoom]="zoom" mapId="4e9837ce2994a1b4">
     <map-advanced-marker [position]="center" title="{{finca?.nombre ?? 'Finca'}}"></map-advanced-marker>
@@ -7,7 +7,7 @@
       [options]="obtenerOpcionesDelPerimetro(perimetro)"></map-polygon>
     }
     @for (dispositivo of fincaConDispositivos?.dispositivos ?? []; track $index) {
-    <map-circle [title]="dispositivo.codigo" [options]="obtenerOpcionesDelDispositivo(dispositivo)"></map-circle>
+    <map-circle [title]="dispositivo.codigo" [options]="obtenerOpcionesDelDispositivo(dispositivo)" [textContent]="'Hola mundo'"></map-circle>
     }
   </google-map>
 </div>

@@ -1,4 +1,4 @@
-﻿namespace Abigeapp.Application.Fincas.ObtenerFincaPorId;
+﻿namespace Abigeapp.Application.Fincas.ObtenerPorId;
 
 public record ObtenerFincaPorIdResponse
 {
